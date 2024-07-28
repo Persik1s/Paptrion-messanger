@@ -8,7 +8,7 @@ import (
 type Server struct {
 	Ipv4Address string
 	Port        string
-	HandlerFunc [0]domain.HandlerFunction
+	HandlerFunc [2]domain.HandlerFunction
 }
 
 func (b *Server) Run() error {

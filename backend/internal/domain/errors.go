@@ -1,0 +1,10 @@
+package domain
+
+import "errors"
+
+var (
+	ERROR_ACCOUNT_ALREADY_EXISTS = errors.New("ERROR_ACCOUNT_ALREADY_EXISTS")
+	ERROR_ACCONUT_NOT_FOUND      = errors.New("ERROR_ACCONUT_NOT_FOUND")
+	ERROR_USER_NOT_FOUND_CHAT    = errors.New("ERROR_USER_NOT_FOUND_CHAT")
+	ERROR_PASSWORD               = errors.New("ERROR_PASSWORD")
+)
