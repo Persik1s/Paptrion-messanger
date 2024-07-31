@@ -1,4 +1,4 @@
-package database
+package storage
 
 import (
 	"context"
@@ -7,7 +7,11 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-type PostgreSqlBase struct {
+const (
+	path = "pkg.repository.storage"
+)
+
+type SqlBase struct {
 	Ipv4Address string
 	Port        string
 	NameBase    string
@@ -17,17 +21,27 @@ type PostgreSqlBase struct {
 	Point     *pgx.Conn
 }
 
-func (b *PostgreSqlBase) Connect() (bool, error) {
+func (b *SqlBase) Connect() (bool, error) {
 	p, err := pgx.Connect(context.Background(), "postgres://postgres:psql@"+b.Ipv4Address+":"+b.Port+"/"+b.NameBase+"?sslmode=disable")
 	if err != nil {
 		fmt.Println(err)
-		return false, err
+		return false, fmt.Errorf("%s", "%w", path, err)
 	}
 	b.Point = p
 	return true, nil
 }
 
-func (b *PostgreSqlBase) Close() bool {
+func (b *SqlBase) LoadStorage() (*SqlBase, error) {
+	if _, err := b.Connect(); err != nil {
+		return nil, fmt.Errorf("%s", "%w", path, err)
+	}
+
+	b.Init()
+
+	return b, nil
+}
+
+func (b *SqlBase) Close() bool {
 	if b.Point == nil {
 		return false
 	}
@@ -35,12 +49,12 @@ func (b *PostgreSqlBase) Close() bool {
 	return true
 }
 
-func (b *PostgreSqlBase) Init() bool {
+func (b *SqlBase) Init() bool {
 	_, err := b.Point.Exec(context.Background(), "CREATE TABLE IF NOT EXISTS "+b.NameTable+" ("+b.Param+")")
 	return err == nil
 }
 
-func (b *PostgreSqlBase) Select(param string, where string, argc ...any) (string, error) {
+func (b *SqlBase) Select(param string, where string, argc ...any) (string, error) {
 	rows := b.Point.QueryRow(context.Background(), "SELECT "+param+" FROM "+b.NameTable+" WHERE "+where+" = $1", argc...)
 
 	var result string
@@ -48,15 +62,7 @@ func (b *PostgreSqlBase) Select(param string, where string, argc ...any) (string
 	return result, err
 }
 
-func (b *PostgreSqlBase) Insert(param string, values string, argc ...any) error {
+func (b *SqlBase) Insert(param string, values string, argc ...any) error {
 	_, err := b.Point.Exec(context.Background(), "INSERT INTO "+b.NameTable+" ( "+param+" ) VALUES ( "+values+" ) ", argc...)
 	return err
-}
-
-var Db = PostgreSqlBase{
-	Ipv4Address: "localhost",
-	Port:        "5432",
-	NameBase:    "users",
-	NameTable:   "users",
-	Param:       "Id INT, Name TEXT, Surname TEXT, Username TEXT,Age INT,Login TEXT,Password TEXT",
 }

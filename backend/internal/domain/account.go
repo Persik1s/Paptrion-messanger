@@ -1,7 +1,12 @@
 package domain
 
 type AccountData struct {
-	Login    string `json:"Login"`
-	Password string `json:"Password"`
-	Ip       string `json:"Ip"`
+	Password string `json:"password"`
+	Login    string `json:"login"`
+}
+
+type AccountInfo struct {
+	User  Member      `json:"user"`
+	Data  AccountData `json:"data"`
+	Email string      `json:"Email"`
 }
