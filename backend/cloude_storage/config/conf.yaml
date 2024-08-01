@@ -1,0 +1,9 @@
+env: "local"
+
+save_path: "D://"
+
+http_server:
+  ipv4_address: "127.0.0.1"
+  port: "8083"
+  timeout: 5s
+  idle_timeout: 60s
