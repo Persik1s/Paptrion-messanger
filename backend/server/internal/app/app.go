@@ -31,8 +31,8 @@ func Init() {
 	handler := handler.NewHandlers(service)
 
 	serv := domain.HttpServer{
-		Ipv4Address: conf.Address,
-		Port:        conf.Port,
+		Ipv4Address: conf.ServerAddress,
+		Port:        conf.ServerPort,
 		TimeOut:     conf.Timeout,
 		IdleTimeout: conf.Iddle_timeout,
 		Handler:     handler.InitRouts(),

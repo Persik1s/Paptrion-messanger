@@ -26,6 +26,9 @@ func (h *Handler) InitRouts() *gin.Engine {
 		cloude.POST("/write-file", h.HandlerWriteFile)
 
 		cloude.GET("/read-file", h.HandlerReadFile)
+
+		cloude.GET("/is-dir", h.HandlerIsDir)
+		cloude.GET("/is-file", h.HandlerIsFile)
 	}
 	return routs
 }

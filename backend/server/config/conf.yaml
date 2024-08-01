@@ -1,5 +1,8 @@
 env: "local"
 
+cloude_server:
+  ipv4_address: "127.0.0.1"
+  port: "8083"
 
 http_server:
   ipv4_address: "127.0.0.1"

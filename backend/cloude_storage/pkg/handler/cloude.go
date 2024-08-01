@@ -104,3 +104,32 @@ func (h *Handler) HandlerDeleteDir(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, nil)
 }
+
+func (h *Handler) HandlerIsFile(c *gin.Context) {
+	var (
+		data domain.FileData
+	)
+
+	if err := c.BindJSON(&data); err != nil {
+		fmt.Errorf("%s", "%w", "pkg.handler.cloude", err)
+		c.JSON(http.StatusBadRequest, ErrorBind)
+		return
+	}
+	status := h.Service.IsFile(data)
+	c.JSON(http.StatusOK, gin.H{"IsFile": status})
+}
+
+func (h *Handler) HandlerIsDir(c *gin.Context) {
+	var (
+		data domain.DirData
+	)
+
+	if err := c.BindJSON(&data); err != nil {
+		fmt.Errorf("%s", "%w", "pkg.handler.cloude", err)
+		c.JSON(http.StatusBadRequest, ErrorBind)
+		return
+	}
+
+	status := h.Service.IsDir(data)
+	c.JSON(http.StatusOK, gin.H{"IsDir": status})
+}

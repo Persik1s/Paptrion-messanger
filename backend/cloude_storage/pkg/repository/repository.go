@@ -6,13 +6,6 @@ import (
 	"stor/pkg/domain"
 )
 
-// type CloudeInterface interface {
-// 	Read(path string) []byte
-// 	Write(path string, b []byte) error
-// 	CreateFile(path string, filename string) error
-// 	CreateDir(path string, namedir string) error
-// }
-
 type CloudeInterface interface {
 	NewDir(data domain.DirData) bool
 	NewFile(data domain.FileData) bool
@@ -22,6 +15,9 @@ type CloudeInterface interface {
 
 	DeleteFile(data domain.FileData) bool
 	DeleteDir(data domain.DirData) bool
+
+	IsFile(data domain.FileData) bool
+	IsDir(data domain.DirData) bool
 }
 type Cloude struct {
 	CloudeInterface
@@ -74,4 +70,19 @@ func (c *Cloude) DeleteFile(data domain.FileData) bool {
 func (c *Cloude) DeleteDir(data domain.DirData) bool {
 	err := os.Remove(c.path + data.Path + data.Name)
 	return err == nil
+}
+
+func (c *Cloude) IsFile(data domain.FileData) bool {
+	_, err := os.Stat(c.path + data.Path + data.Name + "." + data.Format)
+	return !os.IsNotExist(err)
+}
+
+func (c *Cloude) IsDir(data domain.DirData) bool {
+	files, _ := os.ReadDir(c.path + data.Path)
+	for i := range files {
+		if files[i].IsDir() && files[i].Name() == data.Name {
+			return true
+		}
+	}
+	return false
 }

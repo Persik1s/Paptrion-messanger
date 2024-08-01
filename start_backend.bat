@@ -1,7 +1,2 @@
-cd backend
-cd server
-cd cmd
-cd app
-go run main.go
-
-pause
+start start_cloude.bat
+start start_server.bat

@@ -14,6 +14,9 @@ type CloudeInterface interface {
 
 	DeleteFile(data domain.FileData) bool
 	DeleteDir(data domain.DirData) bool
+
+	IsFile(data domain.FileData) bool
+	IsDir(data domain.DirData) bool
 }
 
 type Service struct {
@@ -47,4 +50,12 @@ func (s *Service) DeleteFile(data domain.FileData) bool {
 
 func (s *Service) DeleteDir(data domain.DirData) bool {
 	return s.Cloude.DeleteDir(data)
+}
+
+func (d *Service) IsFile(data domain.FileData) bool {
+	return d.Cloude.IsFile(data)
+}
+
+func (d *Service) IsDir(data domain.DirData) bool {
+	return d.Cloude.IsDir(data)
 }
