@@ -10,6 +10,7 @@ import (
 
 func Init() {
 	conf, _ := config.LoadConfig()
+
 	cloude := repository.NewCloude(conf.FilePath)
 	service := service.NewService(cloude)
 	handler := handler.NewHandler(service)

@@ -10,7 +10,7 @@ import (
 type Config struct {
 	Env                string `yaml:"env"`
 	ConfigHttpServer   `yaml:"http_server"`
-	ConfigCloudeServer `ymal:"cloude_server"`
+	ConfigCloudeServer `yaml:"cloude_server"`
 }
 
 type ConfigHttpServer struct {

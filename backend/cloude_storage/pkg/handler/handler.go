@@ -29,6 +29,9 @@ func (h *Handler) InitRouts() *gin.Engine {
 
 		cloude.GET("/is-dir", h.HandlerIsDir)
 		cloude.GET("/is-file", h.HandlerIsFile)
+
+		cloude.GET("/dir-name-all", h.HandlerDirNameAll)
+		cloude.GET("/file-name-all", h.HandlerFileNameAll)
 	}
 	return routs
 }

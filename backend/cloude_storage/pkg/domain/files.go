@@ -14,3 +14,10 @@ type WriteData struct {
 	File FileData `json:"file"`
 	Data string   `json:"data"`
 }
+type Location struct {
+	Path string `json:"Path" `
+}
+
+type IsExists struct {
+	IsExists bool `json:"IsExists"`
+}

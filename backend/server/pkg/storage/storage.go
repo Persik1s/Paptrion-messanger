@@ -33,11 +33,9 @@ func (b *SqlBase) Connect() (bool, error) {
 
 func (b *SqlBase) LoadStorage() (*SqlBase, error) {
 	if _, err := b.Connect(); err != nil {
-		return nil, fmt.Errorf("%s", "%w", path, err)
+		return nil, err
 	}
-
 	b.Init()
-
 	return b, nil
 }
 

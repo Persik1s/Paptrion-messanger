@@ -6,6 +6,7 @@ import (
 	"app/internal/handler"
 	"app/internal/repository"
 	"app/internal/service"
+	"app/pkg/cloude"
 	"app/pkg/storage"
 	"fmt"
 )
@@ -25,9 +26,27 @@ func Init() {
 		Param:       "Id INT, Name TEXT, Surname TEXT, Username TEXT,Age INT,Login TEXT,Password TEXT,Email TEXT",
 	}
 
-	store, _ := stor.LoadStorage()
-	repo := repository.NewRepository(store)
+	store, err := stor.LoadStorage()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	cloud := cloude.NewCloude(conf.CloudeAddress, conf.CloudePort)
+	if (!cloud.IsDir(cloude.DirData{
+		Name: "usr",
+		Path: "",
+	})) {
+		cloud.CreateDir(cloude.DirData{
+			Name: "usr",
+			Path: "",
+		})
+	}
+
+	repo := repository.NewRepository(store, cloud)
+
 	service := service.NewService(repo)
+
 	handler := handler.NewHandlers(service)
 
 	serv := domain.HttpServer{

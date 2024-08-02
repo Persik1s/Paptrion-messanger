@@ -11,17 +11,24 @@ type CloudeInterface interface {
 	NewFile(data domain.FileData) bool
 
 	WriteFile(data domain.WriteData) bool
-	ReadFile(data domain.FileData) []byte
+	ReadFile(data domain.FileData) ResponeData
 
 	DeleteFile(data domain.FileData) bool
 	DeleteDir(data domain.DirData) bool
 
 	IsFile(data domain.FileData) bool
 	IsDir(data domain.DirData) bool
+
+	DirNameAll(path string) []string
+	FileNameAll(path string) []string
 }
 type Cloude struct {
 	CloudeInterface
 	path string
+}
+type ResponeData struct {
+	Data     string   `json:"data"`
+	DataMass []string `json:"data_mass"`
 }
 
 func NewCloude(path string) *Cloude {
@@ -43,23 +50,24 @@ func (c *Cloude) WriteFile(data domain.WriteData) bool {
 
 	if err != nil {
 		fmt.Errorf("%s", "%w", "pkg.repository.repository")
+		file.Close()
 		return false
 	}
 
 	file.Write([]byte(data.Data))
-
+	file.Close()
 	return true
 }
 
-func (c *Cloude) ReadFile(data domain.FileData) []byte {
+func (c *Cloude) ReadFile(data domain.FileData) ResponeData {
 	bytes, err := os.ReadFile(c.path + data.Path + data.Name + "." + data.Format)
 
 	if err != nil {
 		fmt.Errorf("%s", "%w", "pkg.repository.repository")
-		return []byte{}
+		return ResponeData{Data: "Null"}
 	}
 
-	return bytes
+	return ResponeData{Data: string(bytes)}
 }
 
 func (c *Cloude) DeleteFile(data domain.FileData) bool {
@@ -85,4 +93,32 @@ func (c *Cloude) IsDir(data domain.DirData) bool {
 		}
 	}
 	return false
+}
+
+func (c *Cloude) DirNameAll(path string) []string {
+
+	files, _ := os.ReadDir(c.path + path)
+	mass_name := make([]string, 0, 1)
+	for i := range files {
+		if files[i].IsDir() {
+			mass_name = append(mass_name, files[i].Name())
+		}
+	}
+	return mass_name
+
+}
+
+func (c *Cloude) FileNameAll(path string) []string {
+
+	files, _ := os.ReadDir(c.path + path)
+	mass_name := make([]string, 0, 1)
+	for i := range files {
+		if files[i].IsDir() {
+			continue
+		}
+
+		mass_name = append(mass_name, files[i].Name())
+	}
+	return mass_name
+
 }
