@@ -26,7 +26,7 @@ func (h *Handlers) InitRouts() *gin.Engine {
 	}
 	chat := routs.Group("/chat")
 	{
-		// 	//chat.GET("/get_list_message")
+		chat.GET("/get_list_message", h.get_list_message)
 		chat.POST("/send_message", h.send_message)
 	}
 

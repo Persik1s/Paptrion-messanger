@@ -10,6 +10,8 @@ import (
 type Auth interface {
 	SignIn(data domain.AccountData) (domain.Member, domain.Error)
 	SignUp(data domain.AccountInfo) domain.Error
+
+	GetListMessage(data domain.MessageList) []domain.MessageData
 }
 
 type Service struct {
@@ -37,17 +39,17 @@ func (s *Service) GetListChat(data domain.AccountData) []domain.Member {
 }
 
 func (s *Service) SendMessage(data domain.MessageData) domain.Error {
-	// if !s.Repo.IsLoginForUsername(data.Author.Username) {
-	// 	return domain.Error{
-	// 		Error: domain.ERROR_MEMBER_NOT_FOUND.Error(),
-	// 	}
-	// }
+	if !s.Repo.IsLoginForUsername(data.Author.Username) {
+		return domain.Error{
+			Error: domain.ERROR_MEMBER_NOT_FOUND.Error(),
+		}
+	}
 
-	// if !s.Repo.IsLoginForUsername(data.Recipient.Username) {
-	// 	return domain.Error{
-	// 		Error: domain.ERROR_MEMBER_NOT_FOUND.Error(),
-	// 	}
-	// }
+	if !s.Repo.IsLoginForUsername(data.Recipient.Username) {
+		return domain.Error{
+			Error: domain.ERROR_MEMBER_NOT_FOUND.Error(),
+		}
+	}
 	byte_data, _ := json.Marshal(data)
 	login_author, err := s.Repo.GetLogin(data.Author)
 	if err.Objcet != nil {
@@ -115,4 +117,8 @@ func (s *Service) SendMessage(data domain.MessageData) domain.Error {
 		Error:  "Null",
 		Objcet: nil,
 	}
+}
+
+func (s *Service) GetListMessage(data domain.MessageList) []domain.MessageData {
+	return s.Repo.GetListMessage(data)
 }

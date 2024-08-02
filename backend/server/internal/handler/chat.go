@@ -19,3 +19,17 @@ func (h *Handlers) send_message(c *gin.Context) {
 	h.Service.SendMessage(data)
 	c.JSON(http.StatusOK, nil)
 }
+
+func (h *Handlers) get_list_message(c *gin.Context) {
+	var (
+		data domain.MessageList
+	)
+
+	if err := c.BindJSON(&data); err != nil {
+		c.JSON(http.StatusBadRequest, domain.Error{Error: "ERROR BIND JSON"})
+		return
+	}
+
+	list_message := h.Service.GetListMessage(data)
+	c.JSON(http.StatusOK, list_message)
+}

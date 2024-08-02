@@ -6,12 +6,15 @@ import (
 	"app/pkg/storage"
 	"encoding/json"
 	"fmt"
+	"io"
 	"strconv"
+	"strings"
 )
 
 type Auth interface {
 	SignIn(data domain.AccountData) (domain.Member, domain.Error)
 	SignUp(data domain.AccountInfo) domain.Error
+	GetListMessage(data domain.MessageList) []domain.MessageData
 }
 
 type Repository struct {
@@ -143,4 +146,41 @@ func (r *Repository) GetMemberData(login string) domain.Member {
 		Age:      age_int,
 		Username: username,
 	}
+}
+
+func (r *Repository) GetListMessage(data domain.MessageList) []domain.MessageData {
+	login_author, err := r.GetLogin(data.Author)
+	if err.Objcet != nil {
+		fmt.Println(err)
+		return []domain.MessageData{}
+	}
+	login_recipient, err := r.GetLogin(data.Recipient)
+	if err.Objcet != nil {
+		fmt.Println(err)
+		return []domain.MessageData{}
+	}
+
+	data_file, _ := r.Cloude.ReadFile(cloude.FileData{
+		Name:   "message",
+		Format: "json",
+		Path:   "usr/" + login_author + "/Chats/" + login_recipient + "/",
+	})
+	var list []domain.MessageData
+
+	decoder := json.NewDecoder(strings.NewReader(data_file))
+	for {
+		var message domain.MessageData
+		err := decoder.Decode(&message)
+
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return nil
+		}
+
+		list = append(list, message)
+	}
+
+	return list
 }

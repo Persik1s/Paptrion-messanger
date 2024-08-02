@@ -12,3 +12,8 @@ type MessageData struct {
 	Recipient Member `json:"recipient"`
 	Message   string `json:"message"`
 }
+
+type MessageList struct {
+	Author    Member `json:"author"`
+	Recipient Member `json:"recipient"`
+}
