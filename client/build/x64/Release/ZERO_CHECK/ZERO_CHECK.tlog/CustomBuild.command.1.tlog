@@ -1,0 +1,10 @@
+^D:\PROJECT\MESSANGER\CLIENT\BUILD\CMAKEFILES\A220F226CD32A4273118989AD4B08919\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/project/messanger/client -BD:/project/messanger/client/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/project/messanger/client/build/client.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

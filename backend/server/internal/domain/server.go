@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -15,7 +14,7 @@ type HttpServer struct {
 	Handler     http.Handler
 }
 
-func (h *HttpServer) Run() error {
+func (h *HttpServer) Run() Error {
 	server := http.Server{
 		Addr:         h.Ipv4Address + ":" + h.Port,
 		ReadTimeout:  h.TimeOut,
@@ -24,8 +23,14 @@ func (h *HttpServer) Run() error {
 		Handler:      h.Handler,
 	}
 	if err := server.ListenAndServe(); err != nil {
-		return fmt.Errorf("%s", "%w", "internal.domain.server", err)
+		return Error{
+			Error:  err.Error(),
+			Objcet: err,
+		}
 	}
 
-	return nil
+	return Error{
+		Error:  "Null",
+		Objcet: nil,
+	}
 }

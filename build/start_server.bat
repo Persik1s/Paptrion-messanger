@@ -1,3 +1,4 @@
+cd ../
 cd backend
 cd server
 cd cmd

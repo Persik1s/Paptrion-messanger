@@ -23,7 +23,7 @@ func Init() {
 		Port:        "5432",
 		NameBase:    "users",
 		NameTable:   "users",
-		Param:       "Id INT, Name TEXT, Surname TEXT, Username TEXT,Age INT,Login TEXT,Password TEXT,Email TEXT",
+		Param:       "Id INT, Name TEXT, Surname TEXT, Username TEXT,Age INT,Login TEXT,Password TEXT,Email TEXT, Ip TEXT",
 	}
 
 	store, err := stor.LoadStorage()

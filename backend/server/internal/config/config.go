@@ -1,10 +1,10 @@
 package config
 
 import (
-	"fmt"
-	"time"
+	"app/internal/domain"
 
 	"github.com/ilyakaznacheev/cleanenv"
+	"time"
 )
 
 type Config struct {
@@ -25,12 +25,18 @@ type ConfigCloudeServer struct {
 	CloudePort    string `yaml:"port"`
 }
 
-func LoadConfig() (*Config, error) {
+func LoadConfig() (*Config, domain.Error) {
 	var conf Config
 
 	if err := cleanenv.ReadConfig("../../config/conf.yaml", &conf); err != nil {
-		return nil, fmt.Errorf("%s", "%w", "internal.config.config", err)
+		return nil, domain.Error{
+			Error:  err.Error(),
+			Objcet: nil,
+		}
 	}
 
-	return &conf, nil
+	return &conf, domain.Error{
+		Error:  "Null",
+		Objcet: nil,
+	}
 }

@@ -86,7 +86,7 @@ func (r Repository) SignUp(data domain.AccountInfo) domain.Error {
 		Path: "usr/" + data.Data.Login + "/",
 	})
 
-	err := r.Store.Insert("Username,Name,Surname,Age,Password,Login,Email", "$1,$2,$3,$4,$5,$6,$7", data.User.Username, data.User.Name, data.User.Surname, data.User.Age, data.Data.Password, data.Data.Login, data.Email)
+	err := r.Store.Insert("Username,Name,Surname,Age,Password,Login,Email,Ip", "$1,$2,$3,$4,$5,$6,$7,$8", data.User.Username, data.User.Name, data.User.Surname, data.User.Age, data.Data.Password, data.Data.Login, data.Email, data.Ip)
 	if err != nil {
 		fmt.Println(err)
 		return domain.Error{

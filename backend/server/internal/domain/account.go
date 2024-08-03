@@ -8,5 +8,6 @@ type AccountData struct {
 type AccountInfo struct {
 	User  Member      `json:"user"`
 	Data  AccountData `json:"data"`
+	Ip    string      `json:"ip"`
 	Email string      `json:"email"`
 }

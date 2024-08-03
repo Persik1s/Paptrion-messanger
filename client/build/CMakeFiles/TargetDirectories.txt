@@ -1,0 +1,3 @@
+D:/project/messanger/client/build/CMakeFiles/client.dir
+D:/project/messanger/client/build/CMakeFiles/ALL_BUILD.dir
+D:/project/messanger/client/build/CMakeFiles/ZERO_CHECK.dir

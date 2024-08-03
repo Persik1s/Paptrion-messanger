@@ -16,7 +16,6 @@ func (h *Handler) HandlerWriteFile(c *gin.Context) {
 		data domain.WriteData
 	)
 	if err := c.BindJSON(&data); err != nil {
-		fmt.Errorf("%s", "%w", "pkg.handler.cloude", err)
 		c.JSON(http.StatusBadRequest, ErrorBind)
 		return
 	}
@@ -30,7 +29,6 @@ func (h *Handler) HandlerReadFile(c *gin.Context) {
 	)
 
 	if err := c.BindJSON(&data); err != nil {
-		fmt.Errorf("%s", "%w", "pkg.handler.cloude", err)
 		c.JSON(http.StatusBadRequest, ErrorBind)
 		return
 	}
@@ -52,13 +50,14 @@ func (h *Handler) HandlerCreateFile(c *gin.Context) {
 	fmt.Println(data)
 	h.Service.NewFile(data)
 }
+
 func (h *Handler) HandlerCreateDir(c *gin.Context) {
 	var (
 		data domain.DirData
 	)
 
 	if err := c.BindJSON(&data); err != nil {
-		fmt.Errorf("%s", "%w", "pkg.handler.cloude", err)
+
 		c.JSON(http.StatusBadRequest, ErrorBind)
 		return
 	}
@@ -70,13 +69,13 @@ func (h *Handler) HandlerCreateDir(c *gin.Context) {
 
 	c.AbortWithStatus(http.StatusOK)
 }
+
 func (h *Handler) HandlerDeleteFile(c *gin.Context) {
 	var (
 		data domain.FileData
 	)
 
 	if err := c.BindJSON(&data); err != nil {
-		fmt.Errorf("%s", "%w", "pkg.handler.cloude", err)
 		c.JSON(http.StatusBadRequest, domain.Error{Error: "Bind FileError {delete file}"})
 		return
 	}
@@ -88,13 +87,13 @@ func (h *Handler) HandlerDeleteFile(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, nil)
 }
+
 func (h *Handler) HandlerDeleteDir(c *gin.Context) {
 	var (
 		data domain.DirData
 	)
 
 	if err := c.BindJSON(&data); err != nil {
-		fmt.Errorf("%s", "%w", "pkg.handler.cloude", err)
 		c.JSON(http.StatusBadRequest, ErrorBind)
 		return
 	}
