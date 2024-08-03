@@ -7,6 +7,10 @@ project(client)
 add_executable(
     client
     src/main.cpp
+
     src/net/http/http_request.cpp
     src/net/socket/socket.cpp
+
+    src/api/client/client.cpp
+    src/api/client/user/user.cpp
 )

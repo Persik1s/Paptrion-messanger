@@ -327,6 +327,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\project\messanger\client\src\main.cpp" />
     <ClCompile Include="D:\project\messanger\client\src\net\http\http_request.cpp" />
     <ClCompile Include="D:\project\messanger\client\src\net\socket\socket.cpp" />
+    <ClCompile Include="D:\project\messanger\client\src\api\client\client.cpp" />
+    <ClCompile Include="D:\project\messanger\client\src\api\client\user\user.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\project\messanger\client\build\ZERO_CHECK.vcxproj">

@@ -10,6 +10,12 @@
     <ClCompile Include="D:\project\messanger\client\src\net\socket\socket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\project\messanger\client\src\api\client\client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\project\messanger\client\src\api\client\user\user.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\project\messanger\client\CMakeLists.txt" />

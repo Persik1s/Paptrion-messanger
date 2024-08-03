@@ -29,7 +29,7 @@ namespace net {
             this->type = type;
             this->port = port;
         }
-        
+        IpAddress(){};
     };
 
     class RequestData {

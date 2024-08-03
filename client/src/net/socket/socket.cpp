@@ -14,9 +14,9 @@ namespace net {
 
 
             sockaddr_in address_in;
-            address_in.sin_addr.S_un.S_addr = inet_addr(net::ip_client);
+            address_in.sin_addr.S_un.S_addr = inet_addr(net::client.ip);
             address_in.sin_family = AF_INET;
-            address_in.sin_port = htons(net::port_client);
+            address_in.sin_port = htons(net::client.port);
 
             SOCKET client = socket(AF_INET,SOCK_STREAM,0);
 

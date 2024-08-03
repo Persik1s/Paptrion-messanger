@@ -2,6 +2,7 @@ package handler
 
 import (
 	"app/internal/domain"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -10,6 +11,7 @@ import (
 func (h *Handlers) signin(c *gin.Context) {
 	var data domain.AccountData
 	if err := c.BindJSON(&data); err != nil {
+		fmt.Println(err)
 		c.JSON(http.StatusBadRequest, domain.Error{Error: "ERROR BIND JSON"})
 		return
 	}
@@ -39,4 +41,3 @@ func (h *Handlers) get_list_chat(c *gin.Context) {
 	list_member := h.Service.GetListChat(data)
 	c.JSON(http.StatusOK, list_member)
 }
-

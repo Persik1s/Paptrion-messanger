@@ -51,15 +51,17 @@ namespace net {
                         break;
                     }
                 }            
-                send_data += {
-                    " /" + address + " HTTP/1.0\n" +
-                    "Host: " + ip.ip + ":" + std::to_string(ip.port) + "\n" +
-                    "Content-Type: " + conetnt_type + "; charset=utf-8" +
-                    "Content-Lenght: " + std::to_string(data.size() + 4) + "\r\n\r\n" + data
-                };
+                
+                std::string header = " /" + address + " HTTP/1.0\n" +
+                         "Host: " + ip.ip + ":" + std::to_string(ip.port) + "\n" +
+                         "Content-Type: " + conetnt_type + "; charset=utf-8\n" +
+                         "Content-Length: " + std::to_string(data.size()) + "\r\n\r\n";
+
+                send_data+= header + data;
 
                 int is_send = send(client,send_data.c_str(),send_data.size(),0);
                 char respone_buffer[1000];
+
                 int size = recv(client,respone_buffer,sizeof(respone_buffer),0);
                 
                 RequestData respone = RequestData {

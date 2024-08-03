@@ -1,3 +1,5 @@
 D:\project\messanger\client\src\main.cpp;D:\project\messanger\client\build\client.dir\Release\main.obj
 D:\project\messanger\client\src\net\http\http_request.cpp;D:\project\messanger\client\build\client.dir\Release\http_request.obj
 D:\project\messanger\client\src\net\socket\socket.cpp;D:\project\messanger\client\build\client.dir\Release\socket.obj
+D:\project\messanger\client\src\api\client\client.cpp;D:\project\messanger\client\build\client.dir\Release\client.obj
+D:\project\messanger\client\src\api\client\user\user.cpp;D:\project\messanger\client\build\client.dir\Release\user.obj

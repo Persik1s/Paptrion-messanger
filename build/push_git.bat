@@ -1,4 +1,4 @@
 cd ../
 git add .
-git commit -m "Update"
-git push origin master
+git commit -m "Dev"
+git push origin dev
