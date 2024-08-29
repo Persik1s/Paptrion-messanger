@@ -27,8 +27,3 @@ To compile the project, use the corresponding build.bat files in the build folde
 - Backend
     - Json( [Json](https://github.com/nlohmann/json) )
     - Boost([Boost](https://www.boost.org/))
-- GoLang
-- Server
-    - Gin([Gin](github.com/gin-gonic/gin))
-    - PostgreSQL([SQL](github.com/jackc/pgx/v5))
-    - Config([Cleanenv](github.com/ilyakaznacheev/cleanenv))
